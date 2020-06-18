@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxx.springboot_jsp.mapper.TaskMapper">
+
+    <resultMap type="com.xxx.springboot_jsp.model.Task" id="TaskMap">
+        <id column="id"  property="id"/>
+        <result column="task_name"  property="taskName"/>
+        <result column="task_sign"  property="taskSign"/>
+        <result column="task_content"  property="taskContent"/>
+        <result column="task_answer"  property="taskAnswer"/>
+        <result column="student_name"  property="studentName"/>
+        <result column="teacher_name"  property="teacherName"/>
+    </resultMap>
+    <insert id="addTask" parameterType="com.xxx.springboot_jsp.model.Task">
+        insert into tb_task(task_name,task_content,teacher_name) values (
+            #{taskName}, #{taskContent},#{teacherName}
+        )
+    </insert>
+
+    <update id="completeTask" parameterType="com.xxx.springboot_jsp.model.Task">
+        update tb_task set task_answer = #{taskAnswer},student_name=#{studentName} where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="int">
+         delete from tb_task where id = #{id}
+    </delete>
+    <select id="getTaskList" resultMap="TaskMap">
+        select * from tb_task
+    </select>
+</mapper>

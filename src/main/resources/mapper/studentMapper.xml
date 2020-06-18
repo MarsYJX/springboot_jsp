@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxx.springboot_jsp.mapper.StudentMapper">
+
+    <resultMap type="com.xxx.springboot_jsp.model.Student" id="StudentMap">
+        <id column="id"  property="id"/>
+        <result column="username"  property="username"/>
+        <result column="password"  property="password"/>
+        <result column="student_name"  property="studentName"/>
+        <result column="student_id" property="studentId"/>
+    </resultMap>
+    <insert id="register" parameterType="com.xxx.springboot_jsp.model.Student">
+        insert into tb_student(username,password,student_name,student_id) values (
+        #{username},#{password},#{studentName},#{studentId}
+        )
+    </insert>
+    <select id="login" parameterType="com.xxx.springboot_jsp.model.Student" resultMap="StudentMap">
+select * from tb_student where username = #{username} and password = #{password}
+    </select>
+
+</mapper>
